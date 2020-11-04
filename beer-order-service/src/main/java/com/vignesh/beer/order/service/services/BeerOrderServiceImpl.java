@@ -28,7 +28,6 @@ public class BeerOrderServiceImpl implements BeerOrderService {
 
     private final BeerOrderRepository beerOrderRepository;
     private final CustomerRepository customerRepository;
-
     private final BeerOrderMapper beerOrderMapper;
     private final ApplicationEventPublisher publisher;
 
@@ -38,7 +37,6 @@ public class BeerOrderServiceImpl implements BeerOrderService {
         this.beerOrderRepository = beerOrderRepository;
         this.customerRepository = customerRepository;
         this.beerOrderMapper = beerOrderMapper;
-
         this.publisher = publisher;
     }
 

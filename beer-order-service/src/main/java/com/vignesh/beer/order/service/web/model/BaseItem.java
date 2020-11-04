@@ -1,6 +1,6 @@
-package com.vignesh.beer.order.service.web.model;
 
 
+packag com.vignesh.beer.order.service.web.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;

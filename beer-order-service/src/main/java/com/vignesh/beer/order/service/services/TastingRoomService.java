@@ -1,4 +1,4 @@
-package com.vignesh.beer.order.service.services;
+package guru.sfg.beer.order.service.services;
 
 import com.vignesh.beer.order.service.bootstrap.BeerOrderBootStrap;
 import com.vignesh.beer.order.service.domain.Customer;
