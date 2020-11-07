@@ -3,6 +3,8 @@ package com.vignesh.beerservice.web.controller;
 
 import com.vignesh.beerservice.services.BeerService;
 import com.vignesh.beerservice.web.model.BeerDto;
+import com.vignesh.beerservice.web.model.BeerPagedList;
+import com.vignesh.beerservice.web.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -19,7 +21,34 @@ import java.util.UUID;
 @RestController
 public class BeerController {
 
-   private final BeerService beerService;
+
+    private static final Integer DEFAULT_PAGE_NUMBER = 0;
+    private static final Integer DEFAULT_PAGE_SIZE = 25;
+
+    private final BeerService beerService;
+    @GetMapping(produces = { "application/json" }, path = "beer")
+    public ResponseEntity<BeerPagedList> listBeers(@RequestParam(value = "pageNumber", required = false) Integer pageNumber,
+                                                   @RequestParam(value = "pageSize", required = false) Integer pageSize,
+                                                   @RequestParam(value = "beerName", required = false) String beerName,
+                                                   @RequestParam(value = "beerStyle", required = false) BeerStyleEnum beerStyle,
+                                                   @RequestParam(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand){
+
+        if (showInventoryOnHand == null) {
+            showInventoryOnHand = false;
+        }
+
+        if (pageNumber == null || pageNumber < 0){
+            pageNumber = DEFAULT_PAGE_NUMBER;
+        }
+
+        if (pageSize == null || pageSize < 1) {
+            pageSize = DEFAULT_PAGE_SIZE;
+        }
+
+        BeerPagedList beerList = beerService.listBeers(beerName, beerStyle, PageRequest.of(pageNumber, pageSize), showInventoryOnHand);
+
+        return new ResponseEntity<>(beerList, HttpStatus.OK);
+    }
 
     @GetMapping("beer/{beerId}")
     public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId)
