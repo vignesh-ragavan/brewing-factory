@@ -1,4 +1,4 @@
-package com.vignesh.beer.order.service;
+package com.vignesh.beerorderservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
