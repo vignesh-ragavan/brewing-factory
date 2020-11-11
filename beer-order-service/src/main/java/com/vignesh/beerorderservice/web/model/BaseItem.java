@@ -1,11 +1,8 @@
-package com.vignesh.beer.order.service.web.model;
-
-
-<<<<<<< HEAD:beer-order-service/src/main/java/com/vignesh/beerorderservice/web/model/BaseItem.java
 package com.vignesh.beerorderservice.web.model;
 
-=======
->>>>>>> sprint-3:beer-order-service/src/main/java/com/vignesh/beer/order/service/web/model/BaseItem.java
+
+
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

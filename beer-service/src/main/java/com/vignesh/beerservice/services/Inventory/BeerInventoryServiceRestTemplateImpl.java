@@ -17,7 +17,7 @@ import java.util.UUID;
 
 @Component
 @Slf4j
-@ConfigurationProperties(prefix ="com.vignesh",ignoreUnknownFields = true)
+@ConfigurationProperties(prefix ="com.vignesh",ignoreUnknownFields = false)
 
 public class BeerInventoryServiceRestTemplateImpl implements BeerInventoryService {
 
@@ -41,7 +41,7 @@ public class BeerInventoryServiceRestTemplateImpl implements BeerInventoryServic
         log.debug("Calling Inventory Service");
 
         ResponseEntity<List<BeerInventoryDto>> responseEntity = restTemplate
-                .exchange(beerInventoryServiceHost + INVENTORY_PATH, HttpMethod.GET, null,
+                .exchange( beerInventoryServiceHost+INVENTORY_PATH, HttpMethod.GET, null,
                         new ParameterizedTypeReference<List<BeerInventoryDto>>(){}, (Object) beerId);
 
         //sum from inventory list
