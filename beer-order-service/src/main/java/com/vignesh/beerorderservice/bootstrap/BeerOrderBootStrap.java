@@ -4,14 +4,15 @@ package com.vignesh.beerorderservice.bootstrap;
 import com.vignesh.beerorderservice.domain.Customer;
 import com.vignesh.beerorderservice.repositories.CustomerRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
-
+@Slf4j
 @RequiredArgsConstructor
-//@Component
+@Component
 public class BeerOrderBootStrap implements CommandLineRunner {
     public static final String TASTING_ROOM = "Tasting Room";
     public static final String BEER_1_UPC = "0631234200036";
@@ -23,14 +24,20 @@ public class BeerOrderBootStrap implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         loadCustomerData();
+        System.out.println("kjk");
     }
 
     private void loadCustomerData() {
+
         if (customerRepository.count() == 0) {
-            customerRepository.save(Customer.builder()
+           Customer  savedCustomer= customerRepository.save(Customer.builder()
                     .customerName(TASTING_ROOM)
                     .apiKey(UUID.randomUUID())
                     .build());
+            System.out.println(savedCustomer.toString());
+            System.out.println(savedCustomer.getId().toString());
+
+            log.debug("Tasting room customer id:"+savedCustomer.getId().toString());
         }
     }
 }

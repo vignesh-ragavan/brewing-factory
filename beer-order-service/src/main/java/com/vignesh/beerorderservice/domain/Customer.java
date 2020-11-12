@@ -1,10 +1,7 @@
 
 package com.vignesh.beerorderservice.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +15,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @Entity
+@Data
 public class Customer extends BaseEntity {
 
     @Builder
