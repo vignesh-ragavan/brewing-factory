@@ -20,15 +20,12 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class BeerServiceImpl implements BeerService {
-
     private final BeerRepository beerRepository;
-
     private final BeerMapper beerMapper;
 
-    @Cacheable(cacheNames = "beerListCache",condition = "#showInventoryOnHand==false")
+    @Cacheable(cacheNames = "beerListCache", condition = "#showInventoryOnHand == false ")
     @Override
-    public BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest,Boolean showInventoryOnHand)
-    {
+    public BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest, Boolean showInventoryOnHand) {
 
         BeerPagedList beerPagedList;
         Page<Beer> beerPage;
@@ -44,7 +41,6 @@ public class BeerServiceImpl implements BeerService {
             beerPage = beerRepository.findAllByBeerStyle(beerStyle, pageRequest);
         } else {
             beerPage = beerRepository.findAll(pageRequest);
-            System.out.println();
         }
 
         if (showInventoryOnHand){
@@ -72,19 +68,19 @@ public class BeerServiceImpl implements BeerService {
         return beerPagedList;
     }
 
-    @Cacheable(cacheNames = "beerCache", key = "#beerId",condition =  "#showInventoryOnHand==false")
-
+    @Cacheable(cacheNames = "beerCache", key = "#beerId", condition = "#showInventoryOnHand == false ")
     @Override
-        public BeerDto getById(UUID beerId,Boolean showInventoryOnHand) {
-        if(showInventoryOnHand){
-        return beerMapper.beerToBeerDtoWithInventory(beerRepository.findById(beerId).orElseThrow(NotFoundException::new));
-            }
-          else {
-            return beerMapper.beerToBeerDto(beerRepository.findById(beerId).orElseThrow(NotFoundException::new));
+    public BeerDto getById(UUID beerId, Boolean showInventoryOnHand) {
+        if (showInventoryOnHand) {
+            return beerMapper.beerToBeerDtoWithInventory(
+                    beerRepository.findById(beerId).orElseThrow(NotFoundException::new)
+            );
+        } else {
+            return beerMapper.beerToBeerDto(
+                    beerRepository.findById(beerId).orElseThrow(NotFoundException::new)
+            );
         }
-        }
-
-
+    }
 
     @Override
     public BeerDto saveNewBeer(BeerDto beerDto) {
@@ -108,6 +104,4 @@ public class BeerServiceImpl implements BeerService {
     public BeerDto getByUpc(String upc) {
         return beerMapper.beerToBeerDto(beerRepository.findByUpc(upc));
     }
-
-
 }

@@ -36,3 +36,4 @@ public abstract class BeerMapperDecorator implements BeerMapper {
         return mapper.beerDtoToBeer(beerDto);
     }
 }
+

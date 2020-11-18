@@ -10,22 +10,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class BeerServiceApplicationTests {
 
-    @Autowired
-    BeerInventoryService beerInventoryService;
 
-    @BeforeEach
-    void setUp(){
 
-    }
-
-    @Test
+    //@Test
     void contextLoads() {
     }
 
-   // @Test
-    void getOnHandInventory() {
-        Integer qoh=beerInventoryService.getOnhandInventory(BeerLoader.BEER_1_UUID);
 
-    }
 
 }
